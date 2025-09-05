@@ -25,11 +25,12 @@
 
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary">
-                            Buscar
+                            <i class="fa-solid fa-magnifying-glass"></i> Buscar
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-success" href="{{ url('/aluno/create') }}">Novo</a>
+                        <a class="btn btn-success" href="{{ url('/aluno/create') }}"> <i class="fa-solid fa-plus"></i>
+                            Novo</a>
                     </div>
                 </div>
             </form>
@@ -57,14 +58,18 @@
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->cpf }}</td>
                         <td>{{ $item->telefone }}</td>
-                        <td>Editar</td>
                         <td>
-                            <form action="{{route('aluno.destroy',$item->id)}}" method="post">
+                            <a href="{{ route('aluno.edit', $item->id) }}" class="btn btn-outline-warning">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <form action="{{ route('aluno.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger"
-                                    onclick="return confirm('Deseja Remover o registro?')"
-                                > <i class="fas fa-trash"></i></button>
+                                    onclick="return confirm('Deseja Remover o registro?')"> <i
+                                        class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
