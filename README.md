@@ -59,6 +59,9 @@ Código-Fonte do Projeto desenvolvido durante as aulas de programação web 2 co
 **Gerar as tabelas no banco de dados**  
 `php artisan migrate` ou `php artisan migrate --seed` Gera o banco e execulta os seeds 
 
+**Recriar as tabelas no banco de dados**  
+`php artisan migrate:fresh --seed` Gera o banco e execulta os seeds 
+
 **Salvar .SQL do banco de dados**  
 `database/sql/db_aula.sql`
 

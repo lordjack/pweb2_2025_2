@@ -43,21 +43,28 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <td>Imagem</td>
                     <td>#ID</td>
                     <td>Nome</td>
                     <td>CPF</td>
-                    <td>telefone</td>
+                    <td>Telefone</td>
+                    <td>Categoria</td>
                     <td>Ação</td>
                     <td>Ação</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($dados as $item)
+                    @php
+                        $nome_imagem = !empty($item->imagem) ? $item->imagem : 'sem_imagem.png';
+                    @endphp
                     <tr>
+                        <td><img src="/storage/{{ $nome_imagem }}" width="100px" height="100px" alt="img"></td>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->cpf }}</td>
                         <td>{{ $item->telefone }}</td>
+                        <td>{{ $item->categoria->nome }}</td>
                         <td>
                             <a href="{{ route('aluno.edit', $item->id) }}" class="btn btn-outline-warning">
                                 <i class="fa-solid fa-pen-to-square"></i>
