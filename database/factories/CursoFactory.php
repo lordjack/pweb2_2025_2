@@ -18,9 +18,9 @@ class CursoFactory extends Factory
     {
         return [
           'nome'=> $this->faker->words(2,true),
-          'requisito'=> $this->faker->sentence(),
+          'requisito'=> $this->faker->sentence(1,10),
           'carga_horaria'=> $this->faker->numberBetween(20,120),
-          'valor'=> $this->faker->randomFloat(2,100,1000),
+          'valor'=> $this->faker->randomFloat(2,10,100),
         ];
     }
 }
