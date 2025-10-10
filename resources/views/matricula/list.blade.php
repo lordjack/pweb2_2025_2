@@ -1,20 +1,20 @@
 @extends('base')
-@section('titulo', 'Listagem de Turmas')
+@section('titulo', 'Listagem de Matricula')
 @section('conteudo')
 
-    <h3>Listagem de Turmas - Curso {{ $curso->nome ?? '' }}</h3>
+    <h3>Listagem de Matriculas }}</h3>
 
     <div class="row">
         <div class="col">
-            <form action="{{ route('turma.search') }}" method="post">
+            <form action="{{ route('matricula.search') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-3">
                         <label class="form-label">Tipo</label>
                         <select name="tipo" class="form-select">
-                            <option value="nome">Nome</option>
-                            <option value="cpf">CPF</option>
-                            <option value="telefone">Telefone</option>
+                            <option value="curso">Curso</option>
+                            <option value="turma">Turma</option>
+                            <option value="aluno">Aluno</option>
                         </select>
 
                     </div>
@@ -29,12 +29,12 @@
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-success" href="{{ route('curso.turmas.create', $curso->id) }}"> <i
+                        <a class="btn btn-success" href="{{ route('matricula.create', $curso->id) }}"> <i
                                 class="fa-solid fa-plus"></i>
                             Novo</a>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-success" href="{{ route('curso.index') }}">
+                        <a class="btn btn-success" href="{{ route('matricula.index') }}">
                             <i class="fa-solid fa-arrow-left"></i>
                             Voltar</a>
                     </div>
@@ -51,10 +51,9 @@
                 <tr>
                     <td>#ID</td>
                     <td>Curso</td>
-                    <td>Nome</td>
-                    <td>Código</td>
-                    <td>Data Início</td>
-                    <td>Data Fim</td>
+                    <td>Turma</td>
+                    <td>Aluno</td>
+                    <td>Data Matricula</td>
                     <td>Ação</td>
                     <td>Ação</td>
                     <td>Ação</td>
@@ -64,19 +63,18 @@
                 @foreach ($dados as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->curso->nome }}</td>
-                        <td>{{ $item->nome }}</td>
-                        <td>{{ $item->codigo }}</td>
-                        <td>{{ date('d/m/Y', strtotime($item->data_inicio)) }}</td>
-                        <td>{{ date('d/m/Y', strtotime($item->data_fim)) }}</td>
-   
+                        <td>{{ $item->curso->nome ?? '' }}</td>
+                        <td>{{ $item->turma->nome ?? '' }}</td>
+                        <td>{{ $item->aluno->nome ?? '' }}</td>
+                        <td>{{ date('d/m/Y', strtotime($item->data_matricula)) }}</td>
+
                         <td>
-                            <a href="{{ route('turma.edit', $item->id) }}" class="btn btn-outline-warning">
+                            <a href="{{ route('matricula.edit', $item->id) }}" class="btn btn-outline-warning">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td>
-                            <form action="{{ route('turma.destroy', $item->id) }}" method="post">
+                            <form action="{{ route('matricula.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger"

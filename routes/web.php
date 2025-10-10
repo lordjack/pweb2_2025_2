@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\TurmaController;
+use App\Http\Controllers\MatriculaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,9 +20,15 @@ Route::delete('aluno/{id}', [AlunoController::class, 'destroy'])->name('aluno.de
 
 Route::post('/curso/search', [CursoController::class, 'search'])->name('curso.search');
 Route::resource('curso', App\Http\Controllers\CursoController::class);
+Route::get('/curso/{curso}/turmas', [TurmaController::class, 'cursoTurmasIndex'])->name('curso.turmas');
+Route::get('/curso/{curso}/turmas/create', [TurmaController::class, 'createCursoTurma'])
+    ->name('curso.turmas.create');
 
 Route::post('/turma/search', [TurmaController::class, 'search'])->name('turma.search');
 Route::resource('turma', App\Http\Controllers\TurmaController::class);
+
+Route::post('/matricula/search', [MatriculaController::class, 'matricula'])->name('matricula.search');
+Route::resource('matricula', App\Http\Controllers\MatriculaController::class);
 
 /*
 Route::get('/aluno', function () {

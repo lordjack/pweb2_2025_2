@@ -15,6 +15,15 @@ class TurmaController extends Controller
         return view('turma.list', ['dados' => $dados]);
     }
 
+    public function cursoTurmasIndex(Curso $curso)
+    {
+        $dados = $curso->turmas;
+
+        return view('turma.list', [
+            'dados' => $dados,
+            'curso' => $curso,
+        ]);
+    }
 
     public function create()
     {
@@ -22,6 +31,11 @@ class TurmaController extends Controller
         $cursos = Curso::orderBy('nome')->get();
 
         return view('turma.form', ['cursos' => $cursos]);
+    }
+
+    public function createCursoTurma(Curso $curso)
+    {
+        return view('turma.form', ['curso' => $curso]);
     }
 
     private function validateRequest(Request $request)
@@ -51,9 +65,10 @@ class TurmaController extends Controller
         $this->validateRequest($request);
         $data = $request->all();
 
-        Turma::create($data);
+        $turma = Turma::create($data);
 
-        return redirect('turma');
+       // dd($turma);
+        return redirect()->route('curso.turmas', $turma->curso_id);
     }
 
     public function show(string $id)
