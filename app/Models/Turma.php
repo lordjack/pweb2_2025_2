@@ -29,4 +29,18 @@ class Turma extends Model
     {
         return $this->belongsTo(Curso::class);
     }
+
+    // relação 1-N: 1 Curso tem N Matriculas
+    public function matriculas()
+    {
+        return $this->hasMany(Matricula::class);
+    }
+
+    //relação N-N: curso tem muitos Alunos através da matricula
+    public function alunos()
+    {
+        return $this->belongsToMany(Aluno::class, 'matriculas', 'curso_id', 'aluno_id')
+            ->withPivot('turma_id', 'data_matricula')
+            ->withTimestamps();
+    }
 }

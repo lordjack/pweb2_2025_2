@@ -2,7 +2,7 @@
 @section('titulo', 'Listagem de Matricula')
 @section('conteudo')
 
-    <h3>Listagem de Matriculas }}</h3>
+    <h3>Listagem de Matriculas</h3>
 
     <div class="row">
         <div class="col">
@@ -29,15 +29,11 @@
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-success" href="{{ route('matricula.create', $curso->id) }}"> <i
+                        <a class="btn btn-success" href="{{ route('matricula.create') }}"> <i
                                 class="fa-solid fa-plus"></i>
                             Novo</a>
                     </div>
-                    <div class="col-md-3">
-                        <a class="btn btn-success" href="{{ route('matricula.index') }}">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            Voltar</a>
-                    </div>
+
                 </div>
             </form>
 

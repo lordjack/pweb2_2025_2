@@ -1,19 +1,18 @@
 @extends('base')
-@section('titulo', 'Formulário Aluno')
+@section('titulo', 'Formulário Matricula')
 @section('conteudo')
 
     @php
         if (!empty($dado->id)) {
-            $action = route('turma.update', $dado->id);
+            $action = route('matricula.update', $dado->id);
 
-            $data_inicio = date('d/m/Y', strtotime($dado->data_inicio));
-            $data_fim = date('d/m/Y', strtotime($dado->data_fim));
+            $data_matricula = date('d/m/Y', strtotime($dado->data_matricula));
         } else {
-            $action = route('turma.store');
+            $action = route('matricula.store');
         }
     @endphp
 
-    <h3>Formulário de Turma</h3>
+    <h3>Formulário de Matricula</h3>
 
     <form action="{{ $action }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -38,37 +37,67 @@
                 </select>
             </div>
         @else
-        <div class="col">
-            <input type="hidden" name="curso_id" value="{{ old('curso_id', $curso->id ) }}">
-            <h5>Curso: {{$curso->nome}}</h5>
-        </div>
+            <div class="col">
+                <input type="hidden" name="curso_id" value="{{ old('curso_id', $curso->id) }}">
+                <h5>Curso: {{ $curso->nome }}</h5>
+            </div>
+
+        @endif
+
+
+        @if (!empty($turmas))
+
+            <div class="col">
+                <label for="">Turma</label>
+                <select name="turma_id">
+                    @foreach ($turmas as $item)
+                        <option value="{{ $item->id }}"
+                            {{ old('turma_id', $dado->turma_id ?? '') == $item->id ? 'selected' : '' }}>
+                            {{ $item->nome }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        @else
+            <div class="col">
+                <input type="hidden" name="turma_id" value="{{ old('turma_id', $turma->id) }}">
+                <h5>Turma: {{ $turma->nome }}</h5>
+            </div>
+
+        @endif
+
+        @if (!empty($alunos))
+
+            <div class="col">
+                <label for="">Aluno</label>
+                <select name="aluno_id">
+                    @foreach ($alunos as $item)
+                        <option value="{{ $item->id }}"
+                            {{ old('aluno_id', $dado->aluno_id ?? '') == $item->id ? 'selected' : '' }}>
+                            {{ $item->nome }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        @else
+            <div class="col">
+                <input type="hidden" name="aluno_id" value="{{ old('aluno_id', $aluno->id) }}">
+                <h5>Aluno: {{ $aluno->nome }}</h5>
+            </div>
 
         @endif
 
         <div class="row">
             <div class="col">
-                <label for="">Nome</label>
-                <input type="text" name="nome" value="{{ old('nome', $dado->nome ?? '') }}">
-            </div>
-            <div class="col">
-                <label for="">Código</label>
-                <input type="text" name="codigo" value="{{ old('codigo', $dado->codigo ?? '') }}">
-            </div>
-            <div class="col">
-                <label for="">Data Início</label>
-                <input type="date" name="data_inicio" value="{{ old('data_inicio', $data_inicio ?? '') }}">
-            </div>
-
-            <div class="col">
-                <label for="">Data Fim</label>
-                <input type="date" name="data_fim" value="{{ old('data_fim', $data_fim ?? '') }}">
+                <label for="">Data Matricula</label>
+                <input type="date" name="data_matricula" value="{{ old('data_matricula', $data_matricula ?? '') }}">
             </div>
 
         </div>
         <div class="row">
             <div class="col">
                 <button type="submit" class="btn btn-success">{{ !empty($dado->id) ? 'Atualizar' : 'Salvar' }}</button>
-                <a href="{{ url('turma') }}" class="btn btn-primary">Voltar</a>
+                <a href="{{ url('matricula') }}" class="btn btn-primary">Voltar</a>
             </div>
         </div>
     </form>

@@ -27,7 +27,7 @@ Route::get('/curso/{curso}/turmas/create', [TurmaController::class, 'createCurso
 Route::post('/turma/search', [TurmaController::class, 'search'])->name('turma.search');
 Route::resource('turma', App\Http\Controllers\TurmaController::class);
 
-Route::post('/matricula/search', [MatriculaController::class, 'matricula'])->name('matricula.search');
+Route::post('/matricula/search', [MatriculaController::class, 'search'])->name('matricula.search');
 Route::resource('matricula', App\Http\Controllers\MatriculaController::class);
 
 /*
