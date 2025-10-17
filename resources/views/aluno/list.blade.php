@@ -32,6 +32,10 @@
                         <a class="btn btn-success" href="{{ url('/aluno/create') }}"> <i class="fa-solid fa-plus"></i>
                             Novo</a>
                     </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-danger" href="{{ url('/aluno/report') }}"> <i class="fa-solid fa-pdf-o"></i>
+                            Relatório PDF</a>
+                    </div>
                 </div>
             </form>
 

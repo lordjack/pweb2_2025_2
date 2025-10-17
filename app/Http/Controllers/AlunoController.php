@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aluno;
 use App\Models\CategoriaAluno;
 use Illuminate\Http\Request;
+use PDF;
 
 class AlunoController extends Controller
 {
@@ -78,10 +79,11 @@ class AlunoController extends Controller
         $dado = Aluno::findOrFail($id);
         $categorias = CategoriaAluno::orderBy('nome')->get();
 
-        return view( 'aluno.form',
+        return view(
+            'aluno.form',
             [
                 'dado' => $dado,
-                'categorias'=>$categorias
+                'categorias' => $categorias
             ]
         );
     }
@@ -134,5 +136,22 @@ class AlunoController extends Controller
         }
 
         return view('aluno.list', ["dados" => $dados]);
+    }
+    public function report()
+    {
+
+        //select * from Aluno order by nome
+        //$dados = Aluno::All()
+        $dados = Aluno::orderBy('nome')->get();
+        //$dados = Aluno::where('nome', 'like', "a%")->get();
+
+        $data = [
+            'titulo' => 'Relatório Listagem de Alunos',
+            'dados' =>  $dados,
+        ];
+
+        $pdf = PDF::loadView('aluno.report', $data);
+
+        return $pdf->download('relatorio_listagem_alunos.pdf');
     }
 }
