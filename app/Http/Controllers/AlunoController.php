@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\AlunoQtdCursoChart;
 use App\Models\Aluno;
 use App\Models\CategoriaAluno;
 use Illuminate\Http\Request;
@@ -153,5 +154,10 @@ class AlunoController extends Controller
         $pdf = PDF::loadView('aluno.report', $data);
 
         return $pdf->download('relatorio_listagem_alunos.pdf');
+    }
+
+    public function chart(AlunoQtdCursoChart $chart){
+
+        return view('aluno.chart', ['chart' => $chart->build()]);
     }
 }

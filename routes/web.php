@@ -18,6 +18,7 @@ Route::put('/aluno/update/{id}', [AlunoController::class, 'update'])->name('alun
 Route::post('/aluno/search', [AlunoController::class, 'search'])->name('aluno.search');
 Route::delete('aluno/{id}', [AlunoController::class, 'destroy'])->name('aluno.destroy');
 Route::get('/aluno/report', [AlunoController::class, 'report'])->name('aluno.report');
+Route::get('/aluno/chart', [AlunoController::class, 'chart'])->name('aluno.chart');
 
 Route::post('/curso/search', [CursoController::class, 'search'])->name('curso.search');
 Route::resource('curso', App\Http\Controllers\CursoController::class);

@@ -36,6 +36,10 @@
                         <a class="btn btn-danger" href="{{ url('/aluno/report') }}"> <i class="fa-solid fa-pdf-o"></i>
                             Relatório PDF</a>
                     </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-warning" href="{{ url('/aluno/chart') }}"> <i class="fa-solid fa-pdf-o"></i>
+                            Gerar Gráfico</a>
+                    </div>
                 </div>
             </form>
 
